@@ -58,5 +58,5 @@ $grafana = "# Run Graphana?";
 $customleds = "# Use Custom LED Indications?";
 
 $mlat_marker = "# MLAT marker: Marker with random 5 mile offset on
-<a href=\"https://map.adsbexchange.com/mlat-map/\" target=\"_blank\">https://map.adsbexchange.com/mlat-map</a>";
+<a href=\"https://adsb.fi\" target=\"_blank\">https://adsb.fi</a>";
 ?>

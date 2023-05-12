@@ -110,7 +110,7 @@ if ($_SESSION['authenticated'] != 1) {
 
 
 			<h4 class="adsbx-green logo-margin"><img src="../img/adsbx-svg.svg" width="35"/>  ADSBexchange.com</h4>
-			<h6>ADSBX ADS-B Anywhere <br />version <?php echo file_get_contents("/boot/adsbx-version"); ?></h6>
+			<h6>ADSBX ADS-B Anywhere <br />version <?php echo file_get_contents("/boot/adsbfi-version"); ?></h6>
 			<a class="btn btn-primary" href="../">(..back to main menu)</a><br /><br />
 
 
@@ -158,8 +158,8 @@ if (!empty($_POST["DUMP1090"])) {
 
 	echo '<p>Restarting services... visit <a href="../index.php">this link</a> to verify changes in about 15 secs..</form></body></html>';
 
-	system('sudo /adsbexchange/webconfig/helpers/install-adsbconfig.sh > /dev/null 2>&1 &');
-	system('sudo /adsbexchange/webconfig/helpers/restart-services.sh > /dev/null 2>&1 &');
+	system('sudo /adsbfi/webconfig/helpers/install-adsbconfig.sh > /dev/null 2>&1 &');
+	system('sudo /adsbfi/webconfig/helpers/restart-services.sh > /dev/null 2>&1 &');
 	exit;
 } // end if $_post
 

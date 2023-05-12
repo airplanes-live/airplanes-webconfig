@@ -5,10 +5,10 @@ After=network.target
 [Service]
 SyslogIdentifier=webconfig.service
 EnvironmentFile=/boot/adsb-config.txt
-EnvironmentFile=/boot/adsbx-env
+EnvironmentFile=/boot/adsbfi-env
 Type=simple
 User=root
-ExecStart=/bin/bash /adsbexchange/webconfig/webconfig.sh
+ExecStart=/bin/bash /adsbfi/webconfig/webconfig.sh
 Restart=no
 RestartSec=30
 

@@ -68,13 +68,13 @@ if ($_SESSION['authenticated'] != 1) {
 <center>
 
 			<h4 class="adsbx-green logo-margin"><img src="../img/adsbx-svg.svg" width="35"/>  ADSBexchange.com</h4>
-			<h6>ADSBX ADS-B Anywhere <br />version <?php echo file_get_contents("/boot/adsbx-version"); ?></h6>
+			<h6>ADSBX ADS-B Anywhere <br />version <?php echo file_get_contents("/boot/adsbfi-version"); ?></h6>
 			<a class="btn btn-primary" href="../">(..back to main menu)</a><br /><br />
 
 Note: SDR sticks are often identified by their "serial numbers".<br />
 These serial numbers can be changed using the "rtl_eeprom" command.<br />
 This is mainly helpful when dealing with a setup containing more than one SDR.<br /><br />
-This page changes which SDR is used for 1090 / 978 MHz reception<br>by editing the /boot/adsbx-env and /boot/adsbx-978env files.<br /><br />
+This page changes which SDR is used for 1090 / 978 MHz reception<br>by editing the /boot/adsbfi-env and /boot/adsbfi-978env files.<br /><br />
 If you are outside the USA, 978 isn't used in your location and<br>this page is not relevant as there in only one SDR used by one program.<br /><br />
 
 
@@ -97,20 +97,20 @@ function sanitize($string) {
 	$readsb_sdr = sanitize($_POST["readsb_sdr"]);
  
 	if ($readsb_sdr == 'unspecified') {
-		system('sudo /adsbexchange/webconfig/helpers/set_receiver_options.sh /boot/adsbx-env \'--device-type rtlsdr --ppm 0\'');
+		system('sudo /adsbfi/webconfig/helpers/set_receiver_options.sh /boot/adsbfi-env \'--device-type rtlsdr --ppm 0\'');
 	} else {
-		system('sudo /adsbexchange/webconfig/helpers/set_receiver_options.sh /boot/adsbx-env \'--device ' . $readsb_sdr . ' --device-type rtlsdr --ppm 0\'');
+		system('sudo /adsbfi/webconfig/helpers/set_receiver_options.sh /boot/adsbfi-env \'--device ' . $readsb_sdr . ' --device-type rtlsdr --ppm 0\'');
 	}
 	
 	$dump978_sdr = sanitize($_POST["dump978_sdr"]);
 	$dump978_gain = sanitize($_POST["dump978_gain"]);
 
 	if ($dump978_sdr == 'unspecified') {
-		system('sudo /adsbexchange/webconfig/helpers/set_receiver_options.sh /boot/adsbx-978env \'--sdr-gain ' . $dump978_gain . ' --sdr driver=rtlsdr --format CS8\'');
+		system('sudo /adsbfi/webconfig/helpers/set_receiver_options.sh /boot/adsbfi-978env \'--sdr-gain ' . $dump978_gain . ' --sdr driver=rtlsdr --format CS8\'');
 	} else if ($dump978_sdr == 'stratuxv3') {
-		system('sudo /adsbexchange/webconfig/helpers/set_receiver_options.sh /boot/adsbx-978env \'--stratuxv3 /dev/uatradio\'');
+		system('sudo /adsbfi/webconfig/helpers/set_receiver_options.sh /boot/adsbfi-978env \'--stratuxv3 /dev/uatradio\'');
 	} else {
-		system('sudo /adsbexchange/webconfig/helpers/set_receiver_options.sh /boot/adsbx-978env \'--sdr-gain ' . $dump978_gain . ' --sdr driver=rtlsdr,serial=' . $dump978_sdr . ' --format CS8\'');
+		system('sudo /adsbfi/webconfig/helpers/set_receiver_options.sh /boot/adsbfi-978env \'--sdr-gain ' . $dump978_gain . ' --sdr driver=rtlsdr,serial=' . $dump978_sdr . ' --format CS8\'');
 	}
 	
 
@@ -131,14 +131,14 @@ function sanitize($string) {
 	<?php
 	echo '<p>Restarting services... visit <a href="../index.php">this link</a> to verify changes in about 15 secs..</form></body></html>';
 
-	system('sudo /adsbexchange/webconfig/helpers/restart-services.sh > /dev/null 2>&1 &');
+	system('sudo /adsbfi/webconfig/helpers/restart-services.sh > /dev/null 2>&1 &');
 	exit;
 }
 
 
 //grab readsb env file
 
-$line = exec('cat /boot/adsbx-env | grep ^"RECEIVER_OPTIONS="');
+$line = exec('cat /boot/adsbfi-env | grep ^"RECEIVER_OPTIONS="');
 
 $readsb_selection = strtok(trim(explode("--device ", $line)[1]), ' ');
 $readsb_selection = strtok($readsb_selection, '\"');
@@ -155,7 +155,7 @@ if ($pos === false) $readsb_selection = 'unspecified';
 
 
 
-$line = exec('cat /boot/adsbx-978env | grep ^"RECEIVER_OPTIONS="');
+$line = exec('cat /boot/adsbfi-978env | grep ^"RECEIVER_OPTIONS="');
 
 $dump978_selection = strtok(trim(explode(",serial=", $line)[1]), ' ');
 $dump978_selection = strtok($dump978_selection, '\"');

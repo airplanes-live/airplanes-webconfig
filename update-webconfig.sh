@@ -19,7 +19,7 @@ cd /tmp
 updir=/tmp/update-webconfig
 
 rm -rf $updir
-git clone --depth 1 https://github.com/dstreufert/adsbx-webconfig.git $updir
+git clone --depth 1 https://github.com/rhysackerman/adsbfi-webconfig.git $updir
 
 cd $updir
 bash install.sh dont_reset_config

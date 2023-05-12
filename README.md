@@ -1,3 +1,3 @@
 # adsbx-webconfig
 
-Enhanced web-based configuration for ADSBexchange Pi SDcard image.
+Enhanced web-based configuration for adsb.fi Pi SDcard image.

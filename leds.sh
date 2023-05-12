@@ -65,7 +65,7 @@ START_MONO=$(($(awk '/^now/ {print $3; exit}' /proc/timer_list)/1000000000))
 
 function failurestats {
   # Failure 1 - no aircraft being received
-  AIRCRAFTCOUNT=$(jq '.aircraft_with_pos' /run/adsbexchange-feed/status.json)
+  AIRCRAFTCOUNT=$(jq '.aircraft_with_pos' /run/adsbfi-feed/status.json)
   if [[ ! $AIRCRAFTCOUNT -gt 0 ]]; then
     AIRCRAFTCOUNT=0
   fi
@@ -107,8 +107,8 @@ function failurestats {
     fi
   fi
 
-  # Failure 4 - no connection to ADSBx
-  netstat -apn | grep adsbxfeeder | grep -v 127.0.0.1 >> /dev/null
+  # Failure 4 - no connection to ADSBfi
+  netstat -apn | grep adsbfifeeder | grep -v 127.0.0.1 >> /dev/null
   if [[ $? -eq 0 ]];
   then
     FAILURES[4]="PASS"

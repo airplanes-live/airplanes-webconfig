@@ -5,11 +5,11 @@ After=network.target
 [Service]
 SyslogIdentifier=leds.service
 EnvironmentFile=/boot/adsb-config.txt
-EnvironmentFile=/boot/adsbx-env
+EnvironmentFile=/boot/adsbfi-env
 Type=simple
 User=root
 ExecStartPre=/bin/bash -c "echo none > /sys/class/leds/led0/trigger && echo none > /sys/class/leds/led1/trigger"
-ExecStart=/bin/bash /adsbexchange/webconfig/leds.sh
+ExecStart=/bin/bash /adsbfi/webconfig/leds.sh
 ExecStopPost=/bin/bash -c "echo mmc0 > /sys/class/leds/led0/trigger && echo default-on > /sys/class/leds/led1/trigger"
 Restart=always
 RestartSec=30
