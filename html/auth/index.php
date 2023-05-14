@@ -139,8 +139,8 @@ if (!empty($_POST["password"]) or $unlocked) {
 <body>
 <center>
 
-<h4 class="adsbx-green logo-margin"><img src="../img/adsbx-svg.svg" width="35"/>  ADSBexchange.com</h4>
-<h6>ADSBX ADS-B Anywhere<br />Feeder Authorization</h6>
+<h4 class="adsbx-green logo-margin"><img src="../img/adsbx-svg.svg" width="35"/>  adsb.fi</h4>
+<h6>adsb.fi Feeder Image<br />Feeder Authorization</h6>
 <a class="btn btn-primary" href="../">(..back to main menu)</a><br />
 <br />
 This password is synced with local user account "pi",<br />

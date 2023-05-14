@@ -55,7 +55,7 @@ DUMP978="%%DUMP978%%"
 # Allow ADSBexchange staff to access this unit <br> remotely for troubleshooting via zerotier? (Disabled May 12th - RA)
 #ZEROTIER="%%ZEROTIER%%"
 
-# Run Graphana?
+# Run Grafana?
 PROMG="%%PROMG%%"
 
 # Custom LED indications?

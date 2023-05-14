@@ -34,7 +34,7 @@ done
 ipath=/adsbfi/webconfig
 
 mkdir -p $ipath
-cp adsb-config.txt.webtemplate webconfig.sh leds.sh sanitize-uuid.sh $ipath
+cp adsbfi-config.txt.webtemplate webconfig.sh leds.sh sanitize-uuid.sh $ipath
 cp ./webconfig.service /etc/systemd/system/
 cp ./leds.service /etc/systemd/system/
 rm -f /var/www/html/index.htm*

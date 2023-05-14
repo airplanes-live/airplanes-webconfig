@@ -110,7 +110,7 @@ if ($_SESSION['authenticated'] != 1) {
 
 
 			<h4 class="adsbx-green logo-margin"><img src="../img/adsbx-svg.svg" width="35"/>  ADSBexchange.com</h4>
-			<h6>ADSBX ADS-B Anywhere <br />version <?php echo file_get_contents("/boot/adsbfi-version"); ?></h6>
+			<h6>adsb.fi Feeder Image <br />version <?php echo file_get_contents("/boot/adsbfi-version"); ?></h6>
 			<a class="btn btn-primary" href="../">(..back to main menu)</a><br /><br />
 
 
@@ -131,7 +131,7 @@ if (!empty($_POST["DUMP1090"])) {
 			$new_config .= $key ."=".$value . "\n";
 		}
 	}
-	file_put_contents("/tmp/webconfig/adsb-config.txt", $new_config);
+	file_put_contents("/tmp/webconfig/adsbfi-config.txt", $new_config);
 	?>
 
 	<script type="text/javascript">
@@ -168,7 +168,7 @@ if (!empty($_POST["DUMP1090"])) {
 <table class="table table-striped table-dark">
 <?php
 	echo '<tr><td>';
-	$lines = file('/boot/adsb-config.txt',FILE_SKIP_EMPTY_LINES);
+	$lines = file('/boot/adsbfi-config.txt',FILE_SKIP_EMPTY_LINES);
 	//print_r($lines);
     foreach($lines as $line) {
         if(!(preg_match("/^#/",$line))) {

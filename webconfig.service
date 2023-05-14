@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 SyslogIdentifier=webconfig.service
-EnvironmentFile=/boot/adsb-config.txt
+EnvironmentFile=/boot/adsbfi-config.txt
 EnvironmentFile=/boot/adsbfi-env
 Type=simple
 User=root

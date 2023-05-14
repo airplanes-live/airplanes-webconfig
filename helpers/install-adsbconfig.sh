@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cp /tmp/webconfig/adsb-config.txt /boot/adsb-config.txt
+cp /tmp/webconfig/adsbfi-config.txt /boot/adsbfi-config.txt
 

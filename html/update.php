@@ -26,7 +26,7 @@ tr:nth-child(even) {
 
 <center>
 
-<h2>ADSBexchange.com<br>
+<h2>adsb.fi<br>
 Custom Image - Update</h2><a href="../index.php">(..back to main menu)</a><br><br>
 
 Updates key software components
