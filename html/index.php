@@ -51,7 +51,7 @@
 <body class="container-margin">
 	<div class="container-sm">
 		<div class="d-grid gap-1 col-0 mx-auto">
-			<h4 class="adsbx-green logo-margin"><img src="img/adsbx-svg.svg" width="35"/>  adsb.fi</h4>
+			<h4 class="adsbx-green logo-margin"><img src="img/adsbfi.svg" width="35"/>  adsb.fi</h4>
 			<h6>adsb.fi Feeder Image <br />version <?php echo file_get_contents("/boot/adsbfi-version"); ?></h6>
 			<?php
         			$receivername = file_get_contents("/tmp/webconfig/name");

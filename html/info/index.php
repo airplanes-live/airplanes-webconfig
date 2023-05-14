@@ -187,7 +187,7 @@ echo "<pre>$sdrserials</pre>";
 
 
  <br>
- Position Count By Type: <a href="https://www.adsbexchange.com/version-2-api-wip/" target="_blank">(info)</a>
+ Position Count By Type: <a href="" target="_blank">(info)</a>
 
 <table class="table table-dark">
 

@@ -67,7 +67,7 @@ if ($_SESSION['authenticated'] != 1) {
 <body>
 <center>
 
-			<h4 class="adsbx-green logo-margin"><img src="../img/adsbx-svg.svg" width="35"/>  adsb.fi</h4>
+			<h4 class="adsbx-green logo-margin"><img src="../img/adsbfi.svg" width="35"/>  adsb.fi</h4>
 			<h6>adsb.fi <br />version <?php echo file_get_contents("/boot/adsbfi-version"); ?></h6>
 			<a class="btn btn-primary" href="../">(..back to main menu)</a><br /><br />
 

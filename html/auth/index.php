@@ -139,12 +139,12 @@ if (!empty($_POST["password"]) or $unlocked) {
 <body>
 <center>
 
-<h4 class="adsbx-green logo-margin"><img src="../img/adsbx-svg.svg" width="35"/>  adsb.fi</h4>
+<h4 class="adsbx-green logo-margin"><img src="../img/adsbfi.svg" width="35"/>  adsb.fi</h4>
 <h6>adsb.fi Feeder Image<br />Feeder Authorization</h6>
 <a class="btn btn-primary" href="../">(..back to main menu)</a><br />
 <br />
 This password is synced with local user account "pi",<br />
-whose default password is <a href="https://www.adsbexchange.com/sd-card-docs/">listed in the documentation.</a>
+whose default password is <a href="">listed in the documentation.</a>
 <br /><br />
 
 <?php

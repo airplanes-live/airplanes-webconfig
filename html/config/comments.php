@@ -51,7 +51,7 @@ $autogain = "# Adjust gain every 24 hours automatically?
 
 $enable_978 = "# Enable 978 UAT? (requires second SDR)";
 
-$zerotier = "# Allow ADSBexchange staff to access this unit remotely for troubleshooting via zerotier?";
+$zerotier = "# Allow ADSBfi staff to access this unit remotely for troubleshooting via zerotier?";
 
 $grafana = "# Run Graphana?";
 
