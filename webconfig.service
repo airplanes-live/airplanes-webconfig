@@ -4,11 +4,11 @@ After=network.target
 
 [Service]
 SyslogIdentifier=webconfig.service
-EnvironmentFile=/boot/adsbfi-config.txt
-EnvironmentFile=/boot/adsbfi-env
+EnvironmentFile=/boot/airplanes-config.txt
+EnvironmentFile=/boot/airplanes-env
 Type=simple
 User=root
-ExecStart=/bin/bash /adsbfi/webconfig/webconfig.sh
+ExecStart=/bin/bash /airplanes/webconfig/webconfig.sh
 Restart=no
 RestartSec=30
 

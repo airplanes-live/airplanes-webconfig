@@ -114,7 +114,7 @@ if (!empty($_POST["password"]) or $unlocked) {
 		if (authenticate('pi', 'adsb123')) {
 			$authenticated = true;
 		} else {
-			system('sudo /adsbfi/webconfig/helpers/enable_auth.sh');
+			system('sudo /airplanes/webconfig/helpers/enable_auth.sh');
 		}
 	} else {
 		if (authenticate('pi', $_POST["password"])) {
@@ -139,8 +139,8 @@ if (!empty($_POST["password"]) or $unlocked) {
 <body>
 <center>
 
-<h4 class="adsbx-green logo-margin"><img src="../img/adsbfi.svg" width="35"/>  adsb.fi</h4>
-<h6>adsb.fi Feeder Image<br />Feeder Authorization</h6>
+<h4 class="adsbx-green logo-margin"><img src="../img/airplanes.svg" width="35"/>  airplanes.live</h4>
+<h6>airplanes.live Feeder Image<br />Feeder Authorization</h6>
 <a class="btn btn-primary" href="../">(..back to main menu)</a><br />
 <br />
 This password is synced with local user account "pi",<br />
@@ -151,16 +151,16 @@ whose default password is <a href="">listed in the documentation.</a>
 //handle PW change
 if (!empty($_POST["newpassword1"])) {
 	if ($_SESSION['authenticated'] == 1) {
-		//error_log('attempting password change: ' . 'sudo /adsbfi/webconfig/helpers/change_passwd.sh pi "' . $_POST["oldpassword"] . '" "' . $_POST["newpassword1"] . '"');
+		//error_log('attempting password change: ' . 'sudo /airplanes/webconfig/helpers/change_passwd.sh pi "' . $_POST["oldpassword"] . '" "' . $_POST["newpassword1"] . '"');
 		echo('<br>Attempting password change ....<br>');
-		$output = system('sudo /adsbfi/webconfig/helpers/change_passwd.sh pi ' . escapeshellarg($_POST["oldpassword"]) . ' ' . escapeshellarg($_POST["newpassword1"]) . ' 2>&1', $retval);
+		$output = system('sudo /airplanes/webconfig/helpers/change_passwd.sh pi ' . escapeshellarg($_POST["oldpassword"]) . ' ' . escapeshellarg($_POST["newpassword1"]) . ' 2>&1', $retval);
 		if ($retval != 0) {
 			echo('<br>Password change failed.<br>');
 			return;
 		}
 		echo('<br>Your password has been changed. <br>');
 		echo('<p><a href=".">Click here to login... </a></center></body></html>');
-		system('sudo /adsbfi/webconfig/helpers/enable_auth.sh');
+		system('sudo /airplanes/webconfig/helpers/enable_auth.sh');
 		session_unset();
 		exit;
 	}
@@ -184,7 +184,7 @@ if (!empty($_POST["newpassword1"])) {
 		<progress value="0" max="40" id="progressBar"></progress>
 		<br /><br />Rebooting... </center></body></html>
 		<?php
-		system('sudo /adsbfi/webconfig/helpers/reboot.sh > /dev/null 2>&1 &');
+		system('sudo /airplanes/webconfig/helpers/reboot.sh > /dev/null 2>&1 &');
 		exit;
 	 }
  }
@@ -207,7 +207,7 @@ if (!empty($_POST["newpassword1"])) {
 		<progress value="0" max="20" id="progressBar"></progress>
 		<br /><br />Shutting down... </center></body></html>
 		<?php
-		system('sudo /adsbfi/webconfig/helpers/shutdown.sh > /dev/null 2>&1 &');
+		system('sudo /airplanes/webconfig/helpers/shutdown.sh > /dev/null 2>&1 &');
 		exit;
 	 }
  }
@@ -235,7 +235,7 @@ if (!empty($_POST["newpassword1"])) {
 		<?php
 		ob_end_flush();
 		flush();
-		exec('sudo /adsbfi/webconfig/helpers/run-update.sh > /dev/null 2>&1 &');
+		exec('sudo /airplanes/webconfig/helpers/run-update.sh > /dev/null 2>&1 &');
 		?>
 
 		<br />System will reboot when complete... </center></body></html>
@@ -266,7 +266,7 @@ if (!empty($_POST["newpassword1"])) {
 		<?php
 		ob_end_flush();
 		flush();
-		exec('sudo /adsbfi/webconfig/helpers/run-defaults.sh > /dev/null 2>&1 &');
+		exec('sudo /airplanes/webconfig/helpers/run-defaults.sh > /dev/null 2>&1 &');
 		?>
 		<br /><br />System will reboot when complete... </center></body></html>
 		<?php
@@ -362,7 +362,7 @@ if ($_SESSION['authenticated'] == 1) {
 	<input type="hidden" id="update" name="update" value="update">
 	<input type="submit" class="btn btn-primary" value="Update Feeder">
 	</form>
-	<a href="https://raw.githubusercontent.com/rhysackerman/adsbfi-update/main/update-adsbfi.sh">(executes this script)</a>
+	<a href="https://raw.githubusercontent.com/rhysackerman/airplanes-update/main/update-airplanes.sh">(executes this script)</a>
 	<p>
 
 	<hr width="50%">

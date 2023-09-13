@@ -52,7 +52,7 @@ AUTOGAIN="%%AUTOGAIN%%"
 # Enable 978 UAT? (requires second SDR)
 DUMP978="%%DUMP978%%"
 
-# Allow ADSBfi staff to access this unit <br> remotely for troubleshooting via zerotier? (Disabled May 12th - RA)
+# Allow airplanes.live staff to access this unit <br> remotely for troubleshooting via zerotier? (Disabled May 12th - RA)
 #ZEROTIER="%%ZEROTIER%%"
 
 # Run Grafana?

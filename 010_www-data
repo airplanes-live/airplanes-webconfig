@@ -1,3 +1,3 @@
-www-data ALL = NOPASSWD: /adsbfi/update/update-adsbfi.sh
-www-data ALL = NOPASSWD: /adsbfi/update/resetdefaults.sh
-www-data ALL = NOPASSWD: /adsbfi/update/throttle.sh
+www-data ALL = NOPASSWD: /airplanes/update/update-airplanes.sh
+www-data ALL = NOPASSWD: /airplanes/update/resetdefaults.sh
+www-data ALL = NOPASSWD: /airplanes/update/throttle.sh

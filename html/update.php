@@ -26,7 +26,7 @@ tr:nth-child(even) {
 
 <center>
 
-<h2>adsb.fi<br>
+<h2>airplanes.live<br>
 Custom Image - Update</h2><a href="../index.php">(..back to main menu)</a><br><br>
 
 Updates key software components
@@ -48,7 +48,7 @@ if (!empty($updateit)) {
 	<?php
 
 
-$cmd = 'sudo /adsbfi/update/update-adsbfi.sh';
+$cmd = 'sudo /airplanes/update/update-airplanes.sh';
 while (@ ob_end_flush()); // end all output buffers if any
 
 $proc = popen($cmd, 'r');
@@ -67,7 +67,7 @@ echo '</pre>';
 	var downloadTimer = setInterval(function(){
 	if(timeleft <= 0){
 		clearInterval(downloadTimer);
-		window.location.replace("http://adsbfi.local");
+		window.location.replace("http://airplanes.local");
 	}
 	document.getElementById("progressBar").value = 70 - timeleft;
 	timeleft -= 1;
@@ -80,7 +80,7 @@ echo '</pre>';
 
 	echo '</body></html>';
 
-	system('sudo /adsbfi/webconfig/helpers/reboot.sh > /dev/null 2>&1 &');
+	system('sudo /airplanes/webconfig/helpers/reboot.sh > /dev/null 2>&1 &');
 	exit;
 
 }

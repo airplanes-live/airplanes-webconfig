@@ -1,3 +1,3 @@
-# adsbfi-webconfig
+# airplanes-webconfig
 
-Enhanced web-based configuration for adsb.fi Pi SDcard image.
+Web-based configuration and management tool for the airplaes.live Raspberry Pi feeder image. 

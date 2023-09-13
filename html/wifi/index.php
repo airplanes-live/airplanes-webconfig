@@ -84,8 +84,8 @@ function selectDefaults() {
 
 	<center>
 
-	<h4 class="adsbx-green logo-margin"><img src="../img/adsbfi.svg" width="35"/>  adsb.fi</h4>
-	<h6>adsb.fi Feeder Image <br />version <?php echo file_get_contents("/boot/adsbfi-version"); ?></h6>
+	<h4 class="adsbx-green logo-margin"><img src="../img/airplanes.svg" width="35"/>  airplanes.live</h4>
+	<h6>airplanes.live Feeder Image <br />version <?php echo file_get_contents("/boot/airplanes-version"); ?></h6>
         <a class="btn btn-primary" href="../">(..back to main menu)</a><br /><br />
 	<form method='POST' action="./index.php" onsubmit="return confirm('Save WiFi and reboot the unit?');">
 
@@ -148,15 +148,15 @@ function selectDefaults() {
 	<p>Rebooting... Next steps:
 	<table><tr><td>
 	<ol>
-		<li>"Forget" the ADSBfi-config" wifi network on your phone/PC</li>
-		<li>Join the join the network you just configured and <a href="http://adsbfi.local/config">setup location, etc.using this link.</a> or http://adsbfi.local<br></li>
+		<li>"Forget" the airplanes-config" wifi network on your phone/PC</li>
+		<li>Join the join the network you just configured and <a href="http://airplanes.local/config">setup location, etc.using this link.</a> or http://airplanes.local<br></li>
 	</ol>
 	</td></tr></table>
-		<p>(If you will have multiple units on your network, they will be reachable at:<br>http://adsbfi-2.local<br>http://adsbfi-3.local<br>etc....</body></html>
+		<p>(If you will have multiple units on your network, they will be reachable at:<br>http://airplanes-2.local<br>http://airplanes-3.local<br>etc....</body></html>
 
 	<?php
 
-	system('sudo /adsbfi/webconfig/helpers/install-wpasupp.sh > /dev/null 2>&1 &');
+	system('sudo /airplanes/webconfig/helpers/install-wpasupp.sh > /dev/null 2>&1 &');
 	exit;
 
 }
