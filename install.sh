@@ -51,7 +51,7 @@ done
 
 rm -rf /airplanes/update
 mkdir -p /airplanes
-#git clone --depth 1 https://github.com/airplanes-live/airplanes-update.git /airplanes/update
+git clone --depth 1 https://github.com/airplanes-live/airplanes-update.git /airplanes/update
 
 if [[ "$1" != "dont_reset_config" ]]; then
     pushd /airplanes/update/
