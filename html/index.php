@@ -51,7 +51,9 @@
 <body class="container-margin">
 	<div class="container-sm">
 		<div class="d-grid gap-1 col-0 mx-auto">
-			<h4 class="adsbx-green logo-margin"><img src="img/airplanes.svg" width="35"/>  airplanes.live</h4>
+			<br></br>
+			<img src="img/airplanes.svg" width="75"/>
+			<br></br>
 			<h6>airplanes.live Feeder Image <br />version <?php echo file_get_contents("/boot/airplanes-version"); ?></h6>
 			<?php
         			$receivername = file_get_contents("/tmp/webconfig/name");

@@ -109,7 +109,9 @@ if ($_SESSION['authenticated'] != 1) {
 <center>
 
 
-			<h4 class="adsbx-green logo-margin"><img src="../img/airplanes.svg" width="35"/>  airplanes.live</h4>
+			<br></br>
+			<img src="img/airplanes.svg" width="75"/>
+			<br></br>
 			<h6>airplanes.live Feeder Image <br />version <?php echo file_get_contents("/boot/airplanes-version"); ?></h6>
 			<a class="btn btn-primary" href="../">(..back to main menu)</a><br /><br />
 
