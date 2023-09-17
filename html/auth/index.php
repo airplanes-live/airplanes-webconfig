@@ -140,7 +140,7 @@ if (!empty($_POST["password"]) or $unlocked) {
 <center>
 
 <br></br>
-<img src="img/airplanes.svg" width="75"/>
+<img src="../img/airplanes.svg" width="75"/>
 <br></br>
 <h6>airplanes.live Feeder Image<br />Feeder Authorization</h6>
 <a class="btn btn-primary" href="../">(..back to main menu)</a><br />
