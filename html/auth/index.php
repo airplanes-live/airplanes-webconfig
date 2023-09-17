@@ -364,7 +364,7 @@ if ($_SESSION['authenticated'] == 1) {
 	<input type="hidden" id="update" name="update" value="update">
 	<input type="submit" class="btn btn-primary" value="Update Feeder">
 	</form>
-	<a href="https://raw.githubusercontent.com/rhysackerman/airplanes-update/main/update-airplanes.sh">(executes this script)</a>
+	<a href="https://raw.githubusercontent.com/airplanes-live/airplanes-update/main/update-airplanes.sh">(executes this script)</a>
 	<p>
 
 	<hr width="50%">
