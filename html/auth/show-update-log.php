@@ -1,9 +1,11 @@
 <?php
 session_start();
 if ($_SESSION['authenticated'] != 1) {
+    echo("Update complete!");
 	exit();
 }
 
-system('cat /tmp/web_display_log');
+system('tail -n30 /airplanes/airplanes-update.log');
 //echo($output);
 ?>
+

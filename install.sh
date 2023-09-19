@@ -53,17 +53,18 @@ rm -rf /airplanes/update
 mkdir -p /airplanes
 git clone --depth 1 https://github.com/airplanes-live/airplanes-update.git /airplanes/update
 
+pushd /airplanes/update/
+cp -v -T boot-configs/wpa_supplicant.conf /boot/wpa_supplicant.conf.bak
+# always copy over this file ^ ^ ^
 if [[ "$1" != "dont_reset_config" ]]; then
-    pushd /airplanes/update/
-    cp -v -T boot-configs/wpa_supplicant.conf /boot/wpa_supplicant.conf.bak
     cp -v -T boot-configs/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf
     chmod 600 /etc/wpa_supplicant/wpa_supplicant.conf
     cp -v boot-configs/* /boot
-    popd
 
     echo -e "\n UNLOCKING UNIT UNTIL FIRST CONFIG"
     touch /boot/unlock
 fi
+popd
 
 # We do not use hostapd. Setup network is open.
 systemctl disable hostapd &>/dev/null || true

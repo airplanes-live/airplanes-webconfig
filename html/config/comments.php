@@ -51,12 +51,14 @@ $autogain = "# Adjust gain every 24 hours automatically?
 
 $enable_978 = "# Enable 978 UAT? (requires second SDR)";
 
-$zerotier = "# Allow airplanes staff to access this unit remotely for troubleshooting via zerotier?";
+# $zerotier = "# Allow airplanes staff to access this unit remotely for troubleshooting via zerotier?";
 
 $grafana = "# Run Graphana?";
 
 $customleds = "# Use Custom LED Indications?";
 
-$mlat_marker = "# MLAT marker: Marker with random 5 mile offset on
-<a href=\"https://airplanes.live\" target=\"_blank\">https://airplanes.live</a>";
+$mlat_marker = "# MLAT marker: Marker with random 5 mile offset on the airplanes.live feeder map;
+
+$graphs1090 = "# Enable graphs1090?";
+
 ?>

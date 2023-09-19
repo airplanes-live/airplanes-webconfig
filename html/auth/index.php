@@ -47,7 +47,7 @@
 	}
 	</style>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="../jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 
             function checkPassword() {
@@ -110,7 +110,7 @@ function authenticate($user, $pass){
 
 //Process a password submission, or "unlock file" presence
 
-$unlocked = (file_exists('/boot/unlock') or file_exists('/tmp/webconfig_priv/unlock'));
+$unlocked = file_exists('/boot/unlock');
 
 if (!empty($_POST["password"]) or $unlocked) {
 
@@ -223,33 +223,32 @@ if (!empty($_POST["newpassword1"])) {
 
 //Handle update request
  if (!empty($_POST["update"])) {
-	 if ($_SESSION['authenticated'] == 1) {
+     if ($_SESSION['authenticated'] == 1) {
 
-		?>
-		<!-- Output Window -->
-		<table><tr><td>
-		<pre>
-		<div id="output_container"></div>
-		</pre>
-		</td></tr></table>
-		<script type="text/javascript">
-		function poll(){
-			$("showfile.php", function(data){
-				$("#output_container").load('./showfile.php');
-			}); 
-		}
-		setInterval(function(){ poll(); }, 2000);
-		</script>
-		<?php
-		ob_end_flush();
-		flush();
-		exec('sudo /airplanes/webconfig/helpers/run-update.sh > /dev/null 2>&1 &');
-		?>
-
-		<br />System will reboot when complete... </center></body></html>
-		<?php
-		exit;
-	 }
+        ?>
+        <!-- Output Window -->
+        <table><tr><td>
+        <pre>
+        <div id="output_container"></div>
+        </pre>
+        </td></tr></table>
+        <script type="text/javascript">
+        function poll(){
+            $("show-update-log.php", function(data){
+                $("#output_container").load('./show-update-log.php');
+            });
+        }
+        setInterval(poll, 500);
+        </script>
+        <?php
+        ob_end_flush();
+        flush();
+        exec('sudo /airplanes/webconfig/helpers/run-update.sh > /dev/null 2>&1 &');
+        ?>
+        <br />System will reboot when complete... log will be viewable at the bottom of the info page after the reboot.</center></body></html>
+        <?php
+        exit;
+     }
  }
 
 //Handle setdefaults request
@@ -267,9 +266,9 @@ if (!empty($_POST["newpassword1"])) {
 		function poll(){
 			$("showfile.php", function(data){
 				$("#output_container").load('./showfile.php');
-			}); 
+			});
 		}
-		setInterval(function(){ poll(); }, 2000);
+		setInterval(poll, 2000);
 		</script>
 		<?php
 		ob_end_flush();
@@ -301,8 +300,9 @@ if ($_SESSION['authenticated'] == 0) {
 <br /><br />
 <form method='POST' name="authform" action=".">
   <div class="form-group mb-4 col-6">
-	<input type="password" id="password" name="password" class="form-control form-control-lg">
-	<small id="passwordHelp" class="form-text text-muted">Use the current pi password.</small>
+    <input type="text" autocomplete="username" value="pi" style="display: none;">
+    <input type="password" autocomplete="current-password" id="password" name="password" class="form-control form-control-lg">
+    <small id="passwordHelp" class="form-text text-muted">Use the current pi password.</small>
   </div>
 <input type="submit"  class="btn btn-primary" value="Authenticate">
 </form>
@@ -320,69 +320,71 @@ Return to this page to set a new password.
 
 //Below - things to display if user is authenticated
 if ($_SESSION['authenticated'] == 1) {
-	?>
-	<br />
-	<h3>System is unlocked</h3>
-	<?php
-	if(!file_exists('/boot/unlock') and !file_exists('/tmp/webconfig_priv/unlock')) {
+    ?>
+    <br />
+    <h3>System is unlocked</h3>
+    <hr width="50%">
+    <?php
+    if(!file_exists('/boot/unlock')) {
 
-	echo('<form method="POST" name="logout" action=".">');
-	echo('<input type="hidden" id="logout" name="logout" value="logout">');
-	echo('<input type="submit" class="btn btn-primary" value="Logout"></form>');
-	}
-	?>
-
-	<br>If you wish to change the password, enter new password below:
-	<p>
-	<form method='POST' name="changepwform" action="." onSubmit = "return checkPassword()">
-
-	 <div class="form-group mb-4 col-6">
-		<div id="password1-missing" class="alert alert-danger alert-dismissible fade show" role="alert" hidden>
-			Password missing.
-		</div>
-		<div id="password2-missing" class="alert alert-danger alert-dismissible fade show" role="alert" hidden>
-				Confirm Password missing.
-		</div>
-		<div id="password-no-match" class="alert alert-danger alert-dismissible fade show" role="alert" hidden>
-				Passwords do not match. Try again.
-		</div>
-		<label for="oldpassword">Old Password</label>
-		<input class="form-control form-control-lg" type="password" id="oldpassword" name="oldpassword" required>
-		<label for="password1">New Password</label>
-		<input class="form-control form-control-lg" type="password" id="password1" name="newpassword1" required>
-		 <label for="password2">Re-enter Password</label>
-		<input class="form-control form-control-lg" type="password" id="password2" name="newpassword2" required>
-	</div>
-
-	<input type="submit" class="btn btn-primary" value="Change PW">
-
-	</form>
+    echo('<form method="POST" name="logout" action=".">');
+    echo('<input type="hidden" id="logout" name="logout" value="logout">');
+    echo('<input type="submit" class="btn btn-primary" value="Logout"></form>');
+    }
+    ?>
 
     <hr width="50%">
     <form method='POST' name="reboot" action="." onSubmit = "return confirm('Reboot the feeder?')">
     <input type="hidden" id="reboot" name="reboot" value="reboot">
     <input type="submit" class="btn btn-primary" value="Reboot Feeder">
     </form>
-	<p>
+    <p>
 
-	<hr width="50%">
-	<form method='POST' name="update" action="." onSubmit = "return confirm('Update the feeder?')">
-	<input type="hidden" id="update" name="update" value="update">
-	<input type="submit" class="btn btn-primary" value="Update Feeder">
-	</form>
-	<a href="https://raw.githubusercontent.com/airplanes-live/airplanes-update/main/update-airplanes.sh">(executes this script)</a>
-	<p>
+    <hr width="50%">
+    <form method='POST' name="update" action="." onSubmit = "return confirm('Update the feeder?')">
+    <input type="hidden" id="update" name="update" value="update">
+    <input type="submit" class="btn btn-primary" value="Update Feeder">
+    </form>
+    <p>
 
-	<hr width="50%">
-	<form method='POST' name="setdefaults" action="." onSubmit = "return confirm('Reset EVERYTHING (except the password) to defaults? (wifi, location, etc.)')">
-	<input type="hidden" id="setdefaults" name="setdefaults" value="setdefaults">
-	<input type="submit" class="btn btn-primary" value="Reset EVERYTHING to defaults">
-	</form>
-	(Configuration, network settings, etc.; password is not reset)
-	<p>
+    <hr width="50%">
+    <h5>Password change:</h5>
+    <p>
+    <form method='POST' name="changepwform" action="." onSubmit = "return checkPassword()">
+
+     <div class="form-group mb-4 col-6">
+        <div id="password1-missing" class="alert alert-danger alert-dismissible fade show" role="alert" hidden>
+            Password missing.
+        </div>
+        <div id="password2-missing" class="alert alert-danger alert-dismissible fade show" role="alert" hidden>
+                Confirm Password missing.
+        </div>
+        <div id="password-no-match" class="alert alert-danger alert-dismissible fade show" role="alert" hidden>
+                Passwords do not match. Try again.
+        </div>
+        <input type="text" autocomplete="username" value="pi" style="display: none;">
+        <label for="oldpassword">Old Password</label>
+        <input class="form-control form-control-lg" type="password" autocomplete="current-password" id="oldpassword" name="oldpassword" required>
+        <label for="password1">New Password</label>
+        <input class="form-control form-control-lg" type="password" autocomplete="new-password" id="password1" name="newpassword1" required>
+         <label for="password2">Re-enter New Password</label>
+        <input class="form-control form-control-lg" type="password" autocomplete="new-password" id="password2" name="newpassword2" required>
+    </div>
+
+    <input type="submit" class="btn btn-primary" value="Change PW">
+
+    </form>
+
+    <hr width="50%">
+    <form method='POST' name="setdefaults" action="." onSubmit = "return confirm('Reset EVERYTHING (except the password) to defaults? (wifi, location, etc.)')">
+    <input type="hidden" id="setdefaults" name="setdefaults" value="setdefaults">
+    <input type="submit" class="btn btn-primary" value="Reset EVERYTHING to defaults">
+    </form>
+    (Configuration, network settings, etc.; password is not reset)
+    <p>
 
 
-	<?php
+    <?php
 }
 ?>
 
