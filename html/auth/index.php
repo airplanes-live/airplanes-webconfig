@@ -77,6 +77,12 @@
 
 </script>
 
+<script type="text/javascript">
+            function listDefaultPassword() {
+		alert("Default username and password: pi:adsb123")
+            }
+</script>
+
 
 <?php
 
@@ -146,7 +152,7 @@ if (!empty($_POST["password"]) or $unlocked) {
 <a class="btn btn-primary" href="../">(..back to main menu)</a><br />
 <br />
 This password is synced with local user account "pi",<br />
-whose default password is <a href="">listed in the documentation.</a>
+whose default password is listed <a href="javascript:void(0);" onclick="listDefaultPassword();">here.</a>
 <br /><br />
 
 <?php

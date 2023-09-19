@@ -151,7 +151,7 @@ function selectDefaults() {
 	<table><tr><td>
 	<ol>
 		<li>"Forget" the airplanes-config" wifi network on your phone/PC</li>
-		<li>Join the join the network you just configured and <a href="http://airplanes.local/config">setup location, etc.using this link.</a> or http://airplanes.local<br></li>
+		<li>Join the network you just configured and <a href="http://airplanes.local/config">setup location, etc.using this link.</a> or http://airplanes.local<br></li>
 	</ol>
 	</td></tr></table>
 		<p>(If you will have multiple units on your network, they will be reachable at:<br>http://airplanes-2.local<br>http://airplanes-3.local<br>etc....</body></html>

@@ -354,6 +354,7 @@ $output = shell_exec('sudo /airplanes/webconfig/helpers/journal.sh -u airplanes-
 echo "<pre>$output</pre>";
 ?>
 </td></tr>
+</table>
 
  <br>
  /boot/airplanes-env
