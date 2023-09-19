@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source /boot/adsb-config.txt
+source /boot/airplanes-config.txt
 FR24_EMAIL="$1"
 
 if ! command -v expect; then
