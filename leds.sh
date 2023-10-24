@@ -108,7 +108,7 @@ function failurestats {
   fi
 
   # Failure 4 - no connection to airplanes
-  netstat -apn | grep airplanesfeeder | grep -v 127.0.0.1 >> /dev/null
+  netstat -t -n | grep -E '30004|31090|64004' | grep -E '78.46.234.18' >> /dev/null
   if [[ $? -eq 0 ]];
   then
     FAILURES[4]="PASS"
