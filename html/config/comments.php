@@ -55,6 +55,8 @@ $enable_978 = "# Enable 978 UAT? (requires second SDR)";
 
 $customleds = "# Use Custom LED Indications?";
 
+$modeac = "# Enable sending Mode A/C data to airplanes.live";
+
 $mlat_marker = "# MLAT marker: Marker with random 5 mile offset on the airplanes.live feeder map;
 
 $graphs1090 = "# Enable graphs1090?";

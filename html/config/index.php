@@ -38,10 +38,10 @@ include('comments.php');
 	}
 
 	.alert-success {
-		color: #686868;
+		color: #FFF;
 		font-weight: 900;
-		background-color: #29d682;
-		border-color: #828282;
+		background-color: #064b75;
+		border-color: #fff;
 	}
 
 	.min-adsb-width {
@@ -321,8 +321,31 @@ if (!empty($_POST["DUMP1090"])) {
 
 
             }
-
 		
+            if ($key[0] == "MODEAC") {
+                echo  str_replace('#','<br />',$modeac."<br /><br />");
+
+                ?>
+                <select class="form-control" name="<?php echo $key[0]; ?>">
+                <?php
+
+                if(str_replace(array("\n", "\t", "\r"), '', strtoupper($key[1])) == "YES"){
+                    ?>
+                    <option value="yes" selected>yes</option>
+                    <option value="no">no</option>
+                    <?php
+                } else {
+                    ?>
+                    <option value="yes">yes</option>
+                    <option value="no" selected>no</option>
+                    <?php
+                }
+
+                ?>
+                </select>
+                <?php
+            }
+
             if ($key[0] == "MLAT_MARKER") {
                 echo  str_replace('#','<br />',$mlat_marker."<br /><br />");
 

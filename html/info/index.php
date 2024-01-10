@@ -35,10 +35,10 @@
 	}
 	
 	.alert-success {
-		color: #686868;
+		color: #FFF;
 		font-weight: 900;
-		background-color: #29d682;
-		border-color: #828282;
+		background-color: #064b75;
+		border-color: #fff;
 	}
 	
 	.min-adsb-width {
