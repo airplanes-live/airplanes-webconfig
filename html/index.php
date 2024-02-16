@@ -10,7 +10,7 @@
 	}
 	
 	body {
-		background-color: #343434;
+		background-color: #0f0f0f;
 		color: #FFF;
 	}
 	
