@@ -52,7 +52,7 @@
 	<div class="container-sm">
 		<div class="d-grid gap-1 col-0 mx-auto">
 			<br></br>
-			<img src="img/airplaneslive.png" width="150"/>
+			<img src="img/airplaneslive.png" width="300px"/>
 			<br></br>
 			<h6>airplanes.live Feeder Image <br />version <?php echo file_get_contents("/boot/airplanes-version"); ?></h6>
 			<?php
