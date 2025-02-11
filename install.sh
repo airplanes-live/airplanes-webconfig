@@ -51,7 +51,7 @@ done
 
 rm -rf /airplanes/update
 mkdir -p /airplanes
-git clone --depth 1 https://github.com/airplanes-live/airplanes-update.git /airplanes/update
+git clone --depth 1 -b bookworm https://github.com/airplanes-live/airplanes-update.git /airplanes/update
 
 pushd /airplanes/update/
 cp -v -T boot-configs/wpa_supplicant.conf /boot/wpa_supplicant.conf.bak
