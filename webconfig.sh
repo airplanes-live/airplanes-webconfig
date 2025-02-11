@@ -167,15 +167,6 @@ do
     sleep 1
 done
 
-if [[ "$ssid" == "airplanes-config" ]] && [[ "$fatal" != "yes" ]]; then
-    ping $clientip -I wlan0 -f -w 1; hostup=$?
-    if [ $hostup -eq 0 ]; then
-        echo "timeout tripped but client connected, disabling airplanes-config in 900 sec"
-        sleep 900
-        wpa_cli disable $netnum
-    fi
-fi
-
 kill $(cat /var/run/dnsmasq.pid)
 sleep 1
 killall dnsmasq #Make sure dnsmasq is off
