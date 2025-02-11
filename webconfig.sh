@@ -133,30 +133,16 @@ echo ------------- > /dev/tty1
 echo "Select a WiFi network / country / password for the Raspberry Pi to join" > /dev/tty1
 echo ------------- > /dev/tty1
 
-netnum=$(wpa_cli list_networks | grep airplanes-config | cut -f 1)
-wpa_cli enable_network $netnum
+nmcli connection up airplanes-config
 
 # do the wifi can after selecting / enabling the config network as it can be unreliable otherwise
 wifi_scan
 
-dnsmasq
 totalwait=0
 
 until [ $totalwait -gt 900 ]
 do
     ssid=$(wpa_cli status | grep ssid | grep -v bssid | cut -d "=" -f 2)
-    if [ "$ssid" = "airplanes-config" ]; then
-        ipset=$(ip address show dev wlan0 | grep "172.23.45.1")
-
-        if [ -z "$ipset" ]; then
-            ip address replace 172.23.45.1/24 dev wlan0; echo "setting wlan0 ip to 172.23.45.1/24"
-        fi
-        clientip=$(cat /tmp/webconfig/dnsmasq.leases | head -n 1 |  cut -d " " -f3)
-
-        if [[ ! -z "$clientip" ]]; then
-            echo "Client lease detected at $clientip"
-        fi
-    fi
 
     if (( $totalwait > 30 )) && [[ "$ssid" != "airplanes-config" ]]; then
         # if for some reason we can't enable the config network, bail.
@@ -167,17 +153,19 @@ do
     sleep 1
 done
 
-kill $(cat /var/run/dnsmasq.pid)
-sleep 1
-killall dnsmasq #Make sure dnsmasq is off
-sleep 2
-pkill -9 dnsmasq # Make extra sure dnsmasq is off
-ip address del 172.23.45.1/32 dev wlan0
-wpa_cli disable $netnum
+if [[ "$ssid" == "airplanes-config" ]]; then
+    arp | grep 172.23.45. | grep -v incomplete; hostup=$?
+    if [ $hostup -eq 0 ]; then
+        echo "timeout tripped but client connected, disabling airplanes-config in 900 sec"
+        sleep 900
+        nmcli connection down airplanes-config
+    fi
+fi
+
+nmcli connection down airplanes-config
 
 # in case any subtasks started by firstboot.sh, wait for them to complete
 wait
-
 exit 0;
 
 
