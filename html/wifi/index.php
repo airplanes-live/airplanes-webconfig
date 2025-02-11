@@ -176,10 +176,8 @@ if (!empty($newssid) || !empty($newbssid)) {
    		scan_ssid=1
     		psk="' . $newpassword .'"
 		}';
+    file_put_contents("/tmp/webconfig/wpa_supplicant.conf", $content);
 
-file_put_contents("/tmp/webconfig/airplanes-uiconfig.nmconnection", $content);
-file_put_contents("/tmp/webconfig/wificountry", $newcountry);
-	
 ?>
     <script type="text/javascript">
     var timeleft = 70;
