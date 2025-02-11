@@ -300,19 +300,6 @@ echo "<pre>$output</pre>";
 
  <br>
 
- autogain1090.service logs:
-<div class="table-responsive-lg">
-<table class="table table-dark"><tr><td>
-<?php
-$output = shell_exec('sudo /airplanes/webconfig/helpers/journal.sh -u autogain1090.service');
-echo "<pre>$output</pre>";
-?>
-</td></tr>
-</table>
-</div>
-
- <br>
-
  tar1090.service logs:
 <div class="table-responsive-lg">
 <table class="table table-dark"><tr><td>
