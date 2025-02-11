@@ -16,6 +16,8 @@ else
     location_set=1
 fi
 
+iw reg get | awk '/global/{getline; print substr($2, 1, length($2)-1)}' > /tmp/webconfig/wificountry
+
 chmod -R a+rwX /tmp/webconfig
 
 function services-handle {
