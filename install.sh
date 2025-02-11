@@ -39,7 +39,9 @@ cp ./webconfig.service /etc/systemd/system/
 cp ./leds.service /etc/systemd/system/
 rm -f /var/www/html/index.htm*
 cp -r ./html/* /var/www/html
-cp ./dnsmasq.conf /etc/
+cp ./airplanes-config.nmconnection /etc/NetworkManager/system-connections/
+chmod 600 /etc/NetworkManager/system-connections/airplanes-config.nmconnection
+#cp ./dnsmasq.conf /etc/
 
 rm -rf $ipath/helpers
 cp -r -T ./helpers $ipath/helpers
