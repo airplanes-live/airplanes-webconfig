@@ -147,35 +147,46 @@ if (!empty($newssid) || !empty($newbssid)) {
     $newcountry = $_POST["wifiChooseCountry"];
     $newcountry = str_replace(array("\n", "\t", "\r"), '', $newcountry);
 
-    $content = '
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-update_config=1
-country=' . $newcountry . '
-p2p_disabled=1
+$content = '[connection]
+id=airplanes-uiconfig
+uuid=7902539b-1549-4eb3-b675-da32456e4ca7
+type=wifi
+autoconnect-priority=10
 
-network={
-    ssid="airplanes-config"
-    disabled=1
-    mode=2
-    frequency=2432
-    key_mgmt=NONE
-}
+[wifi]
+mode=infrastructure';
 
-network={
-';
-
-    if (!empty($newssid)) {
+if (!empty($newssid)) {
         $content .= '
-    ssid="' . $newssid . '"';
+ssid=' . $newssid;
     } else {
         $content .= '
-    bssid=' . $newbssid;
+bssid=' . $newbssid;
     }
 
-$content .= '
-    scan_ssid=1
-    psk="' . $newpassword .'"
+// If Password is empty, don't print the wifi-security header in the config file - lets open networks function properly
+if (!empty($newpassword)) {
+        $content .= '
+
+[wifi-security]';
 }
+
+$content .= '
+key-mgmt=wpa-psk
+psk=' . $newpassword;
+
+
+$content .= '
+
+[ipv4]
+method=auto
+
+[ipv6]
+addr-gen-mode=default
+method=auto
+
+[proxy]
+
 
 ';
 
@@ -191,25 +202,17 @@ $content .= '
             clearInterval(downloadTimer);
             window.location.replace("../index.php");
         }
-
         document.getElementById("progressBar").style.width = (70 - timeleft) + "%";
-
         timeleft -= 1;
-
     }, 1000);
     </script>
-
-
         <div class="progress">
                 <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="70" style="width: 1%"></div>
         </div>
-
-
 	<?php
 
 	system('sudo /airplanes/webconfig/helpers/install-wpasupp.sh > /dev/null 2>&1 &');
 	exit;
-
 }
 ?>
     <h3>Choose WiFi Network:</h3>
@@ -225,11 +228,6 @@ $content .= '
             <input class="form-check-input" type="checkbox" id="ssidCheckbox" onclick="javascript:otherssidCheck('ssid');" />
             <label class="form-check-label">Specify Network name (SSID)&emsp;</label>
             <br />
-            <input class="form-check-input" type="checkbox" id="bssidCheckbox" onclick="javascript:otherssidCheck('bssid');" />
-            <label class="form-check-label">Specify Network BSSID</label>
-
-            <br /><br />
-
             <div>
                 <select name="wifiChoose" class="custom-select custom-select-lg btn btn-secondary" id="wifiSelect">
                     <div class="form-group">
@@ -265,13 +263,15 @@ $content .= '
 <?php
 $country_json = file_get_contents('country_codes.json');
 $country_codes = json_decode($country_json, true);
+$current_country = file_get_contents('/tmp/webconfig/wificountry');
 foreach($country_codes as [$code, $country]) {
-    if($code == 'UK'){
+    if($code == trim($current_country)){
         echo '<option value="'.$code.'" selected>'.$country.' - '.$code.'</option>';
     } else {
         echo '<option value="'.$code.'">'.$country.' - '.$code.'</option>';
     }
 }
+echo trim($current_country) . 'x' . $code;
 ?>
             </div>
         </select>
