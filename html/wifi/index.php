@@ -149,13 +149,12 @@ if (!empty($newssid) || !empty($newbssid)) {
 
 $content = '[connection]
 id=airplanes-uiconfig
-uuid=7902539b-1549-4eb3-b675-da32456e4ca7
+uuid=b34c618e-f46b-45df-9039-8e84a865b2ea
 type=wifi
 autoconnect-priority=10
 
 [wifi]
 mode=infrastructure';
-
 if (!empty($newssid)) {
         $content .= '
 ssid=' . $newssid;
@@ -164,18 +163,16 @@ ssid=' . $newssid;
 bssid=' . $newbssid;
     }
 
-// If Password is empty, don't print the wifi-security header in the config file - lets open networks function properly
 if (!empty($newpassword)) {
         $content .= '
-
+	
 [wifi-security]';
 }
 
 $content .= '
 key-mgmt=wpa-psk
 psk=' . $newpassword;
-
-
+	
 $content .= '
 
 [ipv4]
@@ -187,11 +184,11 @@ method=auto
 
 [proxy]
 
-
 ';
 
-    file_put_contents("/tmp/webconfig/wpa_supplicant.conf", $content);
-
+file_put_contents("/tmp/webconfig/airplanes-uiconfig.nmconnection", $content);
+file_put_contents("/tmp/webconfig/wificountry", $newcountry);
+	
 ?>
     <script type="text/javascript">
     var timeleft = 70;
