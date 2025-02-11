@@ -146,41 +146,40 @@ if (!empty($newssid) || !empty($newbssid)) {
 
     $newcountry = $_POST["wifiChooseCountry"];
     $newcountry = str_replace(array("\n", "\t", "\r"), '', $newcountry);
+	
+	$content = '
+		ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+		update_config=1
+		country=' . $newcountry . '
+		p2p_disabled=1
 
-    $content = '
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-update_config=1
-country=' . $newcountry . '
-p2p_disabled=1
+		network={
+    			ssid="airplanes-config"
+    			disabled=1
+    			mode=2
+    			frequency=2432
+    			key_mgmt=NONE
+		}
 
-network={
-    ssid="airplanes-config"
-    disabled=1
-    mode=2
-    frequency=2432
-    key_mgmt=NONE
-}
+		network={
+		';
 
-network={
-';
+   	if (!empty($newssid)) {
+       		$content .= '
+    		ssid="' . $newssid . '"';
+    	} else {
+        	$content .= '
+    		bssid=' . $newbssid;
+	}
+	
+	$content .= '
+   		scan_ssid=1
+    		psk="' . $newpassword .'"
+		}';
 
-    if (!empty($newssid)) {
-        $content .= '
-    ssid="' . $newssid . '"';
-    } else {
-        $content .= '
-    bssid=' . $newbssid;
-    }
-
-$content .= '
-    scan_ssid=1
-    psk="' . $newpassword .'"
-}
-
-';
-
-    file_put_contents("/tmp/webconfig/wpa_supplicant.conf", $content);
-
+file_put_contents("/tmp/webconfig/airplanes-uiconfig.nmconnection", $content);
+file_put_contents("/tmp/webconfig/wificountry", $newcountry);
+	
 ?>
     <script type="text/javascript">
     var timeleft = 70;
