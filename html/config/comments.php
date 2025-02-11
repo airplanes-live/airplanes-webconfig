@@ -46,8 +46,7 @@ $enable_1090 = "# Enable 1090 using readsb?";
 
 $gain = "# Gain setting for 1090 readsb";
 
-$autogain = "# Adjust gain every 24 hours automatically?
-# <a href=\"https://github.com/wiedehopf/adsb-scripts/wiki/Automatic-gain-optimization-for-readsb-and-dump1090-fa\">More info</a>";
+$autogain = "# Allow readsb to adjust gain";
 
 $enable_978 = "# Enable 978 UAT? (requires second SDR)";
 
