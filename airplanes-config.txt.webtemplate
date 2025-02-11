@@ -46,7 +46,7 @@ DUMP1090="%%DUMP1090%%"
 GAIN="%%GAIN%%"
 
 # Adjust gain every 24 hours automatically?<br>
-##<a href="https://github.com/wiedehopf/adsb-scripts/wiki/Automatic-gain-optimization-for-readsb-and-dump1090-fa">More info</a>
+##Allow readsb to adjust gain. 
 AUTOGAIN="%%AUTOGAIN%%"
 
 # Enable 978 UAT? (requires second SDR)
