@@ -51,15 +51,13 @@
 <body class="container-margin">
 	<div class="container-sm">
 		<div class="d-grid gap-1 col-0 mx-auto">
-			<br></br>
+			<br><br>
 			<img src="img/airplaneslive.png" style="max-width: 600px;height: auto;" width="100%"/>
-			<br></br>
-			<h6>airplanes.live Feeder Image <br />version <?php echo file_get_contents("/boot/airplanes-version"); ?></h6>
-			<?php
-        			$receivername = file_get_contents("/tmp/webconfig/name");
-        			$location = file_get_contents("/tmp/webconfig/location");
-        		?>
-				 Receiver Name:
+			<br><br>
+			<h6>airplanes.live Feeder Image <br>V: <?php echo file_get_contents("/boot/airplanes-version"); ?></h6>
+			<h6>Bookworm Shenanigans Edition</h6>
+			
+				Receiver Name:
 				<br />
 				<div class="alert alert-success min-adsb-width" role="alert">
 					<?php echo $receivername ?>
