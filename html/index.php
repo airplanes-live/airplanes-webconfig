@@ -55,7 +55,7 @@
 			<img src="img/airplaneslive.png" style="max-width: 600px;height: auto;" width="100%"/>
 			<br><br>
 			<h6>airplanes.live Feeder Image <br>V: <?php echo file_get_contents("/boot/airplanes-version"); ?></h6>
-			<h6>Bookworm Shenanigans Edition</h6>
+
 			
 				Receiver Name:
 				<br />
