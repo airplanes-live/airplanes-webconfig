@@ -56,7 +56,11 @@
 			<br><br>
 			<h6>airplanes.live Feeder Image <br>V: <?php echo file_get_contents("/boot/airplanes-version"); ?></h6>
 
-			
+			<?php
+        			$receivername = file_get_contents("/tmp/webconfig/name");
+        			$location = file_get_contents("/tmp/webconfig/location");
+        		?>
+
 				Receiver Name:
 				<br />
 				<div class="alert alert-success min-adsb-width" role="alert">
