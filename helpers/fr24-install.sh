@@ -17,27 +17,26 @@ rm /tmp/fr24 -rf
 mkdir -p /tmp/fr24
 cd /tmp
 
-#wget -O fr24.deb https://repo-feed.flightradar24.com/rpi_binaries/fr24feed_1.0.29-8_armhf.deb
-#wget -O fr24.deb https://repo-feed.flightradar24.com/rpi_binaries/fr24feed_1.0.30-3_armhf.deb
-#wget -O fr24.deb https://repo-feed.flightradar24.com/rpi_binaries/fr24feed_1.0.34-0_armhf.deb
 wget -O fr24.deb https://repo-feed.flightradar24.com/rpi_binaries/fr24feed_1.0.48-0_armhf.deb
 
 dpkg -x fr24.deb fr24
 cp -f fr24/usr/bin/fr24feed* /usr/bin
-
-if ! [[ -f /etc/fr24feed.ini ]]; then
+# add fr24key="key" from webui
+ini ]]; then
     cat >/etc/fr24feed.ini << "EOF"
-bs=no
-raw=no
-mlat="no"
-mlat-without-gps="no"
+receiver="beast-tcp"
+host="127.0.0.1:30005"
+bs="no"
+raw="no"
+mlat="yes"
+mlat-without-gps="yes"
 EOF
 fi
 chmod 666 /etc/fr24feed.ini
 
 cat >/etc/systemd/system/fr24feed.service <<"EOF"
 [Unit]
-Description=Flightradar24 Decoder & Feeder
+Description=Flightradar24 Trash Feeder
 After=network-online.target
 
 [Service]
@@ -46,7 +45,7 @@ Restart=always
 ExecStartPre=-/bin/rm -f /dev/shm/decoder.txt
 ExecStopPost=-/bin/rm -f /dev/shm/decoder.txt
 
-ExecStart=/bin/bash -c "stdbuf -oL -eL /usr/bin/fr24feed | stdbuf -oL -eL sed -u -e 's/[0-9,-]* [0-9,:]* | //' | stdbuf -oL -eL grep -v -e '::on_periodic_refresh:' -e 'Synchronizing time via NTP' -e 'synchronized correctly' -e 'Pinging' -e 'time references AC' -e 'mlat.... [A-F,0-9]*' -e '.feed..n.ping ' -e 'syncing stream' -e 'saving bandwidth' | stdbuf -oL -eL perl -ne 'print if (not /mlat..i.Stats/ or ($n++ % 58 == 3)) and (not /feed....sent/ or ($m++ % 250 == 10)) and (not /sent.*aircraft/ or ($m++ % 250 == 10)) and (not /stats.sent/ or ($k++ % 6 == 1)) ;$|=1'"
+ExecStart=/usr/bin/fr24feed --validate-config --config-file=/etc/fr24feed.ini
 
 User=fr24
 PermissionsStartOnly=true
