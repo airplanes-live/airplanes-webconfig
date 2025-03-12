@@ -2,6 +2,8 @@
 
 # expect is likely broken with recent FR24 update
 # fix is relatively simple .. edit fr24_signup_expect to match current FR24 setup prompts
+# underlying problem if fr24feed --signup and --reconfigure failing with SSL error is another issue
+# consider making user sign up at FR24 and REQUIRE sharing key if FR24 code is broken in the future
 
 source /boot/airplanes-config.txt
 FR24_EMAIL="$1"
