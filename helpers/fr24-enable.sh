@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# expect is likely broken with recent FR24 update
+
 source /boot/airplanes-config.txt
 FR24_EMAIL="$1"
 
