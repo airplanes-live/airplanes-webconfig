@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # expect is likely broken with recent FR24 update
-# fix is relatively simple .. edit /root/.fr24_signup_expect to match current FR24 setup prompts
+# fix is relatively simple .. edit fr24_signup_expect to match current FR24 setup prompts
 
 source /boot/airplanes-config.txt
 FR24_EMAIL="$1"
