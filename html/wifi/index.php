@@ -203,8 +203,8 @@ file_put_contents("/tmp/webconfig/wificountry", $newcountry);
             <label class="form-check-label">Specify Network name (SSID)&emsp;</label>
             <br />
             <div>
-                <select name="wifiChoose" class="custom-select custom-select-lg btn btn-secondary" id="wifiSelect">
-                    <div class="form-group">
+               <div class="form-group">
+               <select name="wifiChoose" class="custom-select custom-select-lg btn btn-secondary" id="wifiSelect">
                     <option name="SSID" value="" selected>Choose Network ...</option>
   			<?php
    				 $lines = file('/tmp/webconfig/wifi_scan');
@@ -212,19 +212,23 @@ file_put_contents("/tmp/webconfig/wificountry", $newcountry);
         				echo '<option onclick="javascript:otherssidCheck();" value="'.$line.'">'.$line.'</option>';
     				}
     			?>
-                    </div>
-                </select>
+               </select>
+               </div>
             </div>
             <div id="ssidInput" style="display:none">
                 <input class="form-control form-control-lg" type="text" id="customSSID" name="customSSID" />
-            </div>
-		
+            </div>		
         </td></tr>
+	<tr><td>WiFi Password:
+	    <br /><br />
+            <input class="form-control form-control-lg" type="text" name="wifipassword"  id="wifiSelect" pattern="^[\u0020-\u007e]{8,63}$" />
+        </td></tr>		
         <tr><td>
             <br />
             Choose Wifi Country:<br /><br />
+	    <div class="form-group">
             <select name="wifiChooseCountry" class="custom-select custom-select-lg btn btn-secondary" id="wifiSelectCountry">
-                <div class="form-group">
+                
 		<?php
 			$country_json = file_get_contents('country_codes.json');
 			$country_codes = json_decode($country_json, true);
@@ -237,23 +241,12 @@ file_put_contents("/tmp/webconfig/wificountry", $newcountry);
     				}
 			}
 			echo trim($current_country) . 'x' . $code;
-		?>
+		?>\
+	    </select>
             </div>
-        </select>
         </td></tr>
         </table>
     </div>
-
-<div class="container col-8">
-<table class="table table-striped table-hover table-dark">
-    <tr>
-        <td>
-            WiFi Password:<br /><br />
-            <input class="form-control form-control-lg" type="text" name="wifipassword"  id="wifiSelect" pattern="^[\u0020-\u007e]{8,63}$" />
-        </td>
-    </tr>
-</table>
-</div>
 <input class="btn btn-primary" type="submit" value="Submit">
 </form>
 
