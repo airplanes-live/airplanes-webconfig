@@ -135,8 +135,6 @@ if(isset($_POST['wifiChoose'])) {
     $newssid = $_POST["wifiChoose"];
 } else if (isset($_POST["customSSID"])) {
     $newssid = $_POST["customSSID"];
-} else if (isset($_POST["customBSSID"])) {
-    $newbssid = $_POST["customBSSID"];
 }
 
 if (!empty($newssid) || !empty($newbssid)) {
@@ -239,17 +237,10 @@ file_put_contents("/tmp/webconfig/wificountry", $newcountry);
                     </div>
                 </select>
             </div>
-
-
-
             <div id="ssidInput" style="display:none">
                 <input class="form-control form-control-lg" type="text" id="customSSID" name="customSSID" />
             </div>
-
-            <div id="bssidInput" style="display:none">
-                <input class="form-control form-control-lg" type="text" id="customBSSID" name="customBSSID" />
-            </div>
-
+		
         </td></tr>
         <tr><td>
             <br />
