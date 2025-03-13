@@ -75,37 +75,16 @@ function otherssidCheck(arg) {
         document.getElementById('wifiSelect').selectedIndex = -1;
         document.getElementById('wifiSelect').style.display = 'none';
 
-        document.getElementById('bssidCheckbox').checked = false;
         document.getElementById('dropdownCheckbox').checked = false;
-
-        document.getElementById('customBSSID').value = '';
-
-        document.getElementById('bssidInput').style.display = 'none';
+	    
         document.getElementById('ssidInput').style.display = 'initial';
-    } else if (arg == 'bssid' && document.getElementById('bssidCheckbox').checked) {
-        document.getElementById('wifiSelect').selectedIndex = -1;
-        document.getElementById('wifiSelect').style.display = 'none';
-
-        document.getElementById('dropdownCheckbox').checked = false;
-        document.getElementById('ssidCheckbox').checked = false;
-
-        document.getElementById('customSSID').value = '';
-
-        document.getElementById('bssidInput').style.display = 'initial';
-        document.getElementById('ssidInput').style.display = 'none';
-
     } else {
         document.getElementById('wifiSelect').selectedIndex = 0;
         document.getElementById('dropdownCheckbox').checked = true;
-        document.getElementById('bssidCheckbox').checked = false;
         document.getElementById('ssidCheckbox').checked = false;
 
         document.getElementById('wifiSelect').style.display = 'initial';
 
-        document.getElementById('customSSID').value = '';
-        document.getElementById('customBSSID').value = '';
-
-        document.getElementById('bssidInput').style.display = 'none';
         document.getElementById('ssidInput').style.display = 'none';
     }
 }
@@ -227,13 +206,12 @@ file_put_contents("/tmp/webconfig/wificountry", $newcountry);
                 <select name="wifiChoose" class="custom-select custom-select-lg btn btn-secondary" id="wifiSelect">
                     <div class="form-group">
                     <option name="SSID" value="" selected>Choose Network ...</option>
-    <?php
-
-    $lines = file('/tmp/webconfig/wifi_scan');
-    foreach($lines as $line) {
-        echo '<option onclick="javascript:otherssidCheck();" value="'.$line.'">'.$line.'</option>';
-    }
-    ?>
+  			<?php
+   				 $lines = file('/tmp/webconfig/wifi_scan');
+   				 foreach($lines as $line) {
+        				echo '<option onclick="javascript:otherssidCheck();" value="'.$line.'">'.$line.'</option>';
+    				}
+    			?>
                     </div>
                 </select>
             </div>
@@ -247,20 +225,19 @@ file_put_contents("/tmp/webconfig/wificountry", $newcountry);
             Choose Wifi Country:<br /><br />
             <select name="wifiChooseCountry" class="custom-select custom-select-lg btn btn-secondary" id="wifiSelectCountry">
                 <div class="form-group">
-
-<?php
-$country_json = file_get_contents('country_codes.json');
-$country_codes = json_decode($country_json, true);
-$current_country = file_get_contents('/tmp/webconfig/wificountry');
-foreach($country_codes as [$code, $country]) {
-    if($code == trim($current_country)){
-        echo '<option value="'.$code.'" selected>'.$country.' - '.$code.'</option>';
-    } else {
-        echo '<option value="'.$code.'">'.$country.' - '.$code.'</option>';
-    }
-}
-echo trim($current_country) . 'x' . $code;
-?>
+		<?php
+			$country_json = file_get_contents('country_codes.json');
+			$country_codes = json_decode($country_json, true);
+			$current_country = file_get_contents('/tmp/webconfig/wificountry');
+			foreach($country_codes as [$code, $country]) {
+   				if($code == trim($current_country)){
+        				echo '<option value="'.$code.'" selected>'.$country.' - '.$code.'</option>';
+    				} else {
+        				echo '<option value="'.$code.'">'.$country.' - '.$code.'</option>';
+    				}
+			}
+			echo trim($current_country) . 'x' . $code;
+		?>
             </div>
         </select>
         </td></tr>
