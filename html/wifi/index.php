@@ -198,11 +198,11 @@ file_put_contents("/tmp/webconfig/wificountry", $newcountry);
             <br />
             <input class="form-check-input" type="checkbox" id="dropdownCheckbox" onclick="javascript:otherssidCheck('dropdown');" />
             <label class="form-check-label">Choose Wifi Network &emsp;</label>
-            <br />
+            <br /><br />
             <input class="form-check-input" type="checkbox" id="ssidCheckbox" onclick="javascript:otherssidCheck('ssid');" />
             <label class="form-check-label">Specify Network name (SSID)&emsp;</label>
-            <br />
-            <div>
+            <br /><br />
+            <div><br />
                <div class="form-group">
                <select name="wifiChoose" class="custom-select custom-select-lg btn btn-secondary" id="wifiSelect">
                     <option name="SSID" value="" selected>Choose Network ...</option>
