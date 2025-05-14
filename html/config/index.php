@@ -180,7 +180,7 @@ if (!empty($_POST["DUMP1090"])) {
             if ($key[0] == "GAIN") {
                 echo str_replace('#','<br />',$gain."<br /><br />");
                 ?><select class="form-control" name="<?php echo $key[0]; ?>"><?php
-                $gainoptions = array(-10, 0.0, 0.9, 1.4, 2.7, 3.7, 7.7, 8.7, 12.5, 14.4, 15.7, 16.6, 19.7, 20.7, 22.9, 25.4, 28.0, 29.7, 32.8, 33.8, 36.4, 37.2, 38.6, 40.2, 42.1, 43.4, 43.9, 44.5, 48.0, 49.6, 59);
+                $gainoptions = array(-10, auto, 0.0, 0.9, 1.4, 2.7, 3.7, 7.7, 8.7, 12.5, 14.4, 15.7, 16.6, 19.7, 20.7, 22.9, 25.4, 28.0, 29.7, 32.8, 33.8, 36.4, 37.2, 38.6, 40.2, 42.1, 43.4, 43.9, 44.5, 48.0, 49.6, 59);
 
                 foreach ($gainoptions as $gainval) {
 				?><option value="<?php echo $gainval; ?>" <?php if ($gainval == $key[1]) { echo 'selected'; } ?>><?php echo $gainval ; ?></option>
@@ -268,7 +268,7 @@ if (!empty($_POST["DUMP1090"])) {
                                 echo '</tr></td><tr><td>';
             }
 
-            if ($key[0] == "AUTOGAIN") {
+          /*  if ($key[0] == "AUTOGAIN") {
                 echo  str_replace('#','<br />',$autogain."<br /><br />");
 
                 ?>
@@ -293,7 +293,7 @@ if (!empty($_POST["DUMP1090"])) {
 
                 echo '</tr></td><tr><td>';
             }
-
+*/
             if ($key[0] == "CUSTOMLEDS") {
                 echo  str_replace('#','<br />',$customleds."<br /><br />");
 
