@@ -47,7 +47,7 @@ GAIN="%%GAIN%%"
 
 # Adjust gain every 24 hours automatically?<br>
 ##Allow readsb to adjust gain. 
-AUTOGAIN="%%AUTOGAIN%%"
+# AUTOGAIN="%%AUTOGAIN%%"
 
 # Enable 978 UAT? (requires second SDR)
 DUMP978="%%DUMP978%%"
