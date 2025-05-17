@@ -54,7 +54,8 @@
 			<br><br>
 			<img src="img/airplaneslive.png" style="max-width: 600px;height: auto;" width="100%"/>
 			<br><br>
-			<h6>airplanes.live Feeder Image <br>V: <?php echo file_get_contents("/boot/airplanes-version"); ?></h6>
+			<h6>airplanes.live Image Version <br> <?php echo file_get_contents("/boot/airplanes-version"); ?></h6>
+			<h6>airplanes.live WebUI <br> <?php echo file_get_contents("/boot/airplanes-version-webconfig"); ?></h6>
 
 			<?php
         			$receivername = file_get_contents("/tmp/webconfig/name");
