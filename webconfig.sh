@@ -42,6 +42,10 @@ function services-handle {
     done
 }
 
+# disable autogain scriupt and timer
+    services-handle disable autogain1090.service
+    services-handle disable autogain1090.timer
+    
 if [[ $CUSTOMLEDS == "yes" ]];
 then
     services-handle enable leds
