@@ -172,8 +172,14 @@ if (!empty($_POST["DUMP1090"])) {
 <?php
 	echo '<tr><td>';
 	$lines = file('/boot/airplanes-config.txt',FILE_SKIP_EMPTY_LINES);
-	//print_r($lines);
-    foreach($lines as $line) {
+
+	if (isset($_GET["debug"])) {
+		echo "<pre>";
+		print_r($lines);
+		echo "</pre>";
+	}
+	
+   foreach($lines as $line) {
         if(!(preg_match("/^#/",$line))) {
             $line = str_replace("\"","",$line);
             $key = explode("=",$line);
