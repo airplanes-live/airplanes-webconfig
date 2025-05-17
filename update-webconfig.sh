@@ -28,7 +28,7 @@ bash install.sh dont_reset_config
 cd /tmp
 rm -rf $updir
 
-echo "8.2.$(date '+%y%m%d')" > /boot/airplanes-version-webconfig
+echo "8.3.$(date '+%y%m%d')" > /boot/airplanes-version-webconfig
 
 echo '--------------------------------------------'
 echo '        update-webconfig complete.          '
