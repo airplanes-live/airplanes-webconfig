@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [master, dev]
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: shellcheck + tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends shellcheck
+
+      - name: Shell syntax
+        run: |
+          bash -n install.sh
+          bash -n update-webconfig.sh
+          bash -n helpers/bg-update.sh
+          bash -n helpers/update-channel.sh
+          bash -n test/update-channel-test.sh
+
+      - name: Shellcheck changed scripts
+        run: |
+          shellcheck -S warning \
+            install.sh \
+            update-webconfig.sh \
+            helpers/bg-update.sh \
+            helpers/update-channel.sh \
+            test/update-channel-test.sh
+
+      - name: Run channel tests
+        run: bash test/update-channel-test.sh
