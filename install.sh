@@ -73,6 +73,15 @@ if [[ "$1" != "dont_reset_config" ]]; then
 fi
 popd >/dev/null || exit
 
+# One-time migration of /boot/airplanes-config.txt to the new MLAT_USER
+# schema. Idempotent (byte-compares before rewriting). Runs AFTER the
+# boot-configs/* copy above so it sees the freshly-placed template if
+# one was just dropped. Safe on dont_reset_config installs too: the
+# existing airplanes-config.txt is what needs migrating.
+if [[ -f /boot/airplanes-config.txt ]]; then
+    /airplanes/webconfig/helpers/migrate-config.sh /boot/airplanes-config.txt
+fi
+
 # We do not use hostapd. Setup network is open.
 systemctl disable hostapd &>/dev/null || true
 systemctl enable webconfig
