@@ -37,7 +37,10 @@ airplanes_webconfig_apply_channel_defaults() {
         *)
             channel="main"
             update_branch="main"
-            feed_branch="main"
+            # Stable legacy-image updates must not pin feed/main here.
+            # Leaving AIRPLANES_FEED_BRANCH empty lets airplanes-update's
+            # tag-aware bridge resolve the latest stable feed release tag.
+            feed_branch=""
             webconfig_branch="master"
             ;;
     esac
