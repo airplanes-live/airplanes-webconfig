@@ -62,7 +62,7 @@ assert_dev_defaults() {
 assert_main_defaults() {
     assert_eq "main" "$AIRPLANES_CHANNEL" "channel"
     assert_eq "main" "$AIRPLANES_UPDATE_BRANCH" "update branch"
-    assert_eq "main" "$AIRPLANES_FEED_BRANCH" "feed branch"
+    assert_eq "" "$AIRPLANES_FEED_BRANCH" "feed branch"
     assert_eq "master" "$AIRPLANES_WEBCONFIG_BRANCH" "webconfig branch"
     assert_eq "https://raw.githubusercontent.com/airplanes-live/airplanes-update/main/update-airplanes.sh" \
         "$(airplanes_update_script_url)" "update raw URL"
