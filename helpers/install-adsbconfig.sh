@@ -5,7 +5,14 @@
 # adjacent to /boot/airplanes-config.txt so readers never see a
 # legacy-only intermediate state at the canonical path.
 set -euo pipefail
-exec flock /var/lock/airplanes-config.lock env AIRPLANES_CONFIG_LOCK_HELD=1 bash -c '
+# AIRPLANES_CONFIG_BACKUP_BASE points backups at the canonical path. Without
+# it, migrate-config.sh would write `.pre-mlat-split` / `.pre-marker-split`
+# next to the random temp file; mv-to-canonical leaves those backups
+# orphaned in /boot under random suffixes, accumulating one per save.
+exec flock /var/lock/airplanes-config.lock env \
+    AIRPLANES_CONFIG_LOCK_HELD=1 \
+    AIRPLANES_CONFIG_BACKUP_BASE=/boot/airplanes-config.txt \
+    bash -c '
     set -euo pipefail
     tmp="$(mktemp /boot/airplanes-config.txt.XXXXXX)"
     trap "rm -f \"$tmp\"" EXIT
