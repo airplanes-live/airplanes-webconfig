@@ -161,15 +161,15 @@ test_shell_metachars_escaped() {
     echo "PASS: shell metachars escaped in both USER and MLAT_USER"
 }
 
-test_empty_user_degenerate() {
+test_empty_user_defaults_anonymous() {
     local f
     f="$(with_file "case9" 'USER=""
 ')"
     run_migrator "$f"
     assert_file_eq 'USER=""
-MLAT_USER=""
-MLAT_ENABLED=true' "$f" "USER='' → MLAT_USER='' MLAT_ENABLED=true"
-    echo "PASS: empty USER (degenerate) handled"
+MLAT_USER="Anonymous"
+MLAT_ENABLED=true' "$f" "USER='' → MLAT_USER='Anonymous' MLAT_ENABLED=true"
+    echo "PASS: empty USER defaults MLAT_USER to Anonymous"
 }
 
 test_malformed_quote_rejected() {
@@ -230,7 +230,7 @@ main() {
     test_already_migrated_no_user
     test_idempotent_second_run
     test_shell_metachars_escaped
-    test_empty_user_degenerate
+    test_empty_user_defaults_anonymous
     test_malformed_quote_rejected
     test_missing_file_is_noop
     test_backup_not_overwritten
