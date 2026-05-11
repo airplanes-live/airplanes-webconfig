@@ -30,7 +30,11 @@ jobs:
           bash -n update-webconfig.sh
           bash -n helpers/bg-update.sh
           bash -n helpers/update-channel.sh
+          bash -n helpers/migrate-config.sh
+          bash -n helpers/install-adsbconfig.sh
+          bash -n helpers/restart-services.sh
           bash -n test/update-channel-test.sh
+          bash -n test/migrate-config-test.sh
 
       - name: Shellcheck changed scripts
         run: |
@@ -39,7 +43,14 @@ jobs:
             update-webconfig.sh \
             helpers/bg-update.sh \
             helpers/update-channel.sh \
-            test/update-channel-test.sh
+            helpers/migrate-config.sh \
+            helpers/install-adsbconfig.sh \
+            helpers/restart-services.sh \
+            test/update-channel-test.sh \
+            test/migrate-config-test.sh
 
       - name: Run channel tests
         run: bash test/update-channel-test.sh
+
+      - name: Run migrate-config tests
+        run: bash test/migrate-config-test.sh
