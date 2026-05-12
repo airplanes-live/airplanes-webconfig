@@ -220,6 +220,60 @@ test_crlf_tolerated() {
     echo "PASS: CRLF tolerated"
 }
 
+# --- extract_key bash double-quote grammar edge cases ---
+
+test_extract_key_preserves_literal_backslash() {
+    # File contains the literal text: USER="abc\xyz"
+    # Bash double-quote: \x is NOT in the escape set ({\, ", $, `}), so
+    # the sourced value is the 7-byte literal abc\xyz. extract_key must
+    # preserve the backslash and round-trip it through emit so sourcing
+    # the migrated file yields the same value.
+    local f
+    f="$(with_file "case_extract_backslash_literal" 'USER="abc\xyz"
+')"
+    run_migrator "$f"
+    local got
+    got="$(
+        # shellcheck source=/dev/null
+        . "$f" && printf '%s' "$MLAT_USER"
+    )" || fail "sourcing migrated file failed: $(cat "$f")"
+    assert_eq 'abc\xyz' "$got" "literal backslash preserved in MLAT_USER"
+    echo "PASS: extract_key preserves literal backslash for \\X non-escape"
+}
+
+test_extract_key_resolves_recognized_escapes() {
+    # File contains: USER="a\\b\$c"  (8 bytes between quotes)
+    # Bash double-quote: \\ → \, \$ → $. Sourced value: a\b$c.
+    local f
+    f="$(with_file "case_extract_escapes" 'USER="a\\b\$c"
+')"
+    run_migrator "$f"
+    local got
+    got="$(
+        # shellcheck source=/dev/null
+        . "$f" && printf '%s' "$MLAT_USER"
+    )" || fail "sourcing migrated file failed: $(cat "$f")"
+    assert_eq 'a\b$c' "$got" "recognized backslash escapes resolved"
+    echo "PASS: extract_key resolves recognized escapes (\\\\, \\\$)"
+}
+
+test_extract_key_escaped_close_quote_no_real_close() {
+    # File contains: USER="abc\"  with newline after the escaped quote.
+    # The trailing \" is the escape for a literal " (still inside the
+    # string), so there is no real close-quote on this line. extract_key
+    # must reject as malformed and leave the file untouched.
+    local f rc=0
+    f="$(with_file "case_extract_escaped_close" 'USER="abc\"
+DUMP1090=yes
+')"
+    local before
+    before="$(cat "$f")"
+    run_migrator "$f" 2>/dev/null || rc=$?
+    [[ "$rc" -ne 0 ]] || fail "escaped close-quote not rejected"
+    assert_file_eq "$before" "$f" "malformed file unchanged"
+    echo "PASS: extract_key rejects escaped close-quote (no real close)"
+}
+
 # --- MLAT_MARKER → MLAT_PRIVATE migration (co-emit, MLAT_MARKER preserved) ---
 
 test_marker_no_emits_private_true_alongside() {
@@ -443,6 +497,9 @@ main() {
     test_missing_file_is_noop
     test_backup_not_overwritten
     test_crlf_tolerated
+    test_extract_key_preserves_literal_backslash
+    test_extract_key_resolves_recognized_escapes
+    test_extract_key_escaped_close_quote_no_real_close
     test_marker_no_emits_private_true_alongside
     test_marker_yes_emits_private_false_alongside
     test_marker_uppercase_tolerated
