@@ -1,35 +1,19 @@
 #!/bin/bash
+# Legacy 2025/bookworm feeders migrate to the unified webconfig on the default
+# branch. This entry point redirects there; after the first upgrade the
+# channel-aware updater takes over and this branch is no longer consulted.
+set -euo pipefail
 
-set -e
-trap 'echo "[ERROR] Error in line $LINENO when executing: $BASH_COMMAND"' ERR
+url="https://raw.githubusercontent.com/airplanes-live/airplanes-webconfig/master/update-webconfig.sh"
+tmpdir="$(mktemp -d /tmp/airplanes-webconfig-entry.XXXXXX)"
+trap 'rm -rf "$tmpdir"' EXIT
+entry="$tmpdir/update-webconfig.sh"
 
-# in case /var/log is full ... delete some logs
-echo test > /var/log/.test 2>/dev/null || rm -f /var/log/*.log
+if ! wget -q --timeout=30 --tries=3 -O "$entry" "$url" || [[ ! -s "$entry" ]]; then
+    echo "[ERROR] failed to fetch $url" >&2
+    exit 1
+fi
 
-function aptInstall() {
-    if ! apt install -y --no-install-recommends --no-install-suggests "$@"; then
-        apt update
-        apt install -y --no-install-recommends --no-install-suggests "$@"
-    fi
-}
-
-aptInstall git
-
+export AIRPLANES_WEBCONFIG_BRANCH=master
 cd /tmp
-updir=/tmp/update-webconfig
-
-rm -rf $updir
-git clone --depth 1 -b bookworm https://github.com/airplanes-live/airplanes-webconfig.git $updir
-
-cd $updir
-bash install.sh dont_reset_config
-
-
-cd /tmp
-rm -rf $updir
-
-echo "8.3.$(date '+%y%m%d')" > /boot/airplanes-version-webconfig
-
-echo '--------------------------------------------'
-echo '        update-webconfig complete.          '
-echo '--------------------------------------------'
+bash "$entry" "$@"
